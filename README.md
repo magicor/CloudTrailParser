@@ -1,11 +1,11 @@
 # Python AWS CloudTrail parser
 A Python parser class for [CloudTrail](https://aws.amazon.com/cloudtrail/) event archives, previously dumped to an S3 bucket. Class provides an iterator which will:
 
-- Scan a given directory for archive files matching the required pattern.
-- Decompress each archive in memory.
+- Scan a given directory for archive files and JSON file matching the required pattern.
+- If archive files, decompress each archive in memory.
 - Parse JSON payload and return each event in turn.
 
-Parser contained in `cloudtrailparser.py`, with `timezone.py` used as a simple [`datetime.tzinfo`](https://docs.python.org/2/library/datetime.html#datetime.tzinfo) concrete class implement to provide UTC timezone.
+Parser contained in `cloudtrailparser.py`, with `timezone` class used as a simple [`datetime.tzinfo`](https://docs.python.org/2/library/datetime.html#datetime.tzinfo) concrete class implement to provide UTC timezone.
 
 ## Example
 
@@ -13,6 +13,7 @@ Parser contained in `cloudtrailparser.py`, with `timezone.py` used as a simple [
 $ ls -l1 /path/to/cloudtrail/archives
 ACCOUNT_IDXX_CloudTrail_ap-southeast-2_20160101T2155Z_uiGgE0mgD8GUpvNi.json.gz
 ACCOUNT_IDXX_CloudTrail_ap-southeast-2_20160101T2305Z_BNBEUH14QUAV0dNd.json.gz
+ACCOUNT_IDXX_CloudTrail_ap-southeast-2_20170303T0000Z_4qtJmjZy88xW59bU.json
 
 $ ./example.py
 
