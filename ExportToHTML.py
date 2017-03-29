@@ -5,7 +5,7 @@ def export(myFile, parser):
 	addScript(myFile)
 	addHeader(myFile)
 	for event in parser.events():
-		aRow = "\t\t<tr><td>"+str(event['event_time'])[:-6]+"</td><td>"+str(event['event_name'])+"</td><td>"+str(event['event_source'])+"</td><td>"+str(event['source_ip'])+"</td><td>"+str(event['user_type'])+"</td><td>"+str(event['user_name'])+"</td><td>"+str(event['invoked_by'])+"</td></tr>\n"
+		aRow = "\t\t<tr><td>"+str(event['event_time'])[:-6]+"</td><td>"+str(event['event_name'])+"</td><td>"+str(event['event_source'])+"</td><td>"+str(event['source_ip'])+"</td><td>"+str(event['user_type'])+"</td><td>"+str(event['user_name'])+"</td><td>"+str(event['invoked_by'])+"</td><td>"+str(event['request'])+"</td><td>"+str(event['response'])+"</td></tr>\n"
 		addRow(myFile,aRow)
 
 	addEnd(myFile)
@@ -240,10 +240,10 @@ def addHeader(myFile):
 
         <h3><a href="#">Notes</a></h3>
         <div>
-            <h4>Readme</h4>
+            <h4>This tool is used for CloudTrail log analysis. Change its JSON format to a readable table format.</h4>
         </div>
     </div>
-
+    </br>
     Choose Theme:
     <select></select>
     <p></p>
@@ -257,6 +257,8 @@ def addHeader(myFile):
         <div id="checkbox"><input type="checkbox" name="col5" checked="checked" /> User Type </div>
         <div id="checkbox"><input type="checkbox" name="col6" checked="checked" /> User Name </div>
         <div id="checkbox"><input type="checkbox" name="col7" checked="checked" /> Invoked By </div>
+        <div id="checkbox"><input type="checkbox" name="col8" checked="checked" /> Request Elements </div>
+        <div id="checkbox"><input type="checkbox" name="col9" checked="checked" /> Response Elements </div>
     </form>
     <table id="table1" class="tablesorter">
     <thead>
@@ -267,14 +269,22 @@ def addHeader(myFile):
             <th  class="col4" data-placeholder="filter">Source IP</th>
             <th  class="col5" data-placeholder="filter">User Type</th>
             <th  class="col6" data-placeholder="filter">User Name</th>
-            <th  class="col7 filter-false sorter-false">Invoked By</th>
+            <th  class="col7" data-placeholder="filter">Invoked By</th>
+            <th  class="col8" data-placeholder="filter">Request Elements</th>
+            <th  class="col9" filter-false sorter-false">Response Elements</th>
         </thead>
     <tfoot>
-        <tr><th>Event Time</th><th>Event Name</th><th>Event Source</th><th>Source IP</th><th>User Type</th><th>User Name</th><th>Invoked By</th></tr>
+        <tr><th>Event Time</th><th>Event Name</th><th>Event Source</th><th>Source IP</th><th>User Type</th><th>User Name</th><th>Invoked By</th><th>Request Elements</th><th>Response Elements</th></tr>
     </tfoot>
     <tbody>
 """
 
+	Html_file=open(myFile,"a")
+	Html_file.write(html_header)
+	Html_file.close()
+
+def addCheckbox(myFile, row):
+	
 	Html_file=open(myFile,"a")
 	Html_file.write(html_header)
 	Html_file.close()
